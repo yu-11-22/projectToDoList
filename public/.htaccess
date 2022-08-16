@@ -1,0 +1,6 @@
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteRule ^css($|/) - [L,NC]
+    RewriteCond "%{REQUEST_URI}"  !^/index.php
+    RewriteRule ^(.*)$ index.php?cat1=$1
+</IfModule>
