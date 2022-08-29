@@ -36,7 +36,6 @@ class Model
         } else {
             return false;
         }
-        return false;
     }
 
     /**
@@ -63,7 +62,6 @@ class Model
         } else {
             return false;
         }
-        return false;
     }
 
     /**
@@ -79,7 +77,6 @@ class Model
         } else {
             return false;
         }
-        return false;
     }
 
     /**
@@ -96,6 +93,5 @@ class Model
         } else {
             return false;
         }
-        return false;
     }
 }

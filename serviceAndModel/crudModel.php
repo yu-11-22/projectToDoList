@@ -43,8 +43,9 @@ class CRUD
     function delete($dataTable, $tableColumn, $tableContent)
     {
         global $link;
-        $sqlString = "DELETE FROM $dataTable WHERE $dataTable.$tableColumn={$tableContent}";
-        mysqli_query($link, $sqlString);
+        $sqlString = "DELETE FROM $dataTable WHERE $dataTable.$tableColumn=$tableContent";
+        $result = mysqli_query($link, $sqlString);
+        return $result;
     }
 
     /**

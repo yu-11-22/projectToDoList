@@ -9,6 +9,7 @@ class LoginController
 
     public function __construct()
     {
+        $_SESSION['account'] = null;
         $this->template = new Template();
         $this->service = new LoginService();
     }

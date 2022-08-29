@@ -8,6 +8,7 @@ class ToDoListController
     public $template;
     public $service;
     public $model;
+    public $delId;
 
     public function __construct()
     {
@@ -40,8 +41,6 @@ class ToDoListController
     {
         $this->newToDoList();
         $this->deleteToDoList();
-        echo "<script>window.location.href='/todoList'</script>";
-        die();
     }
 
     /**
@@ -55,6 +54,9 @@ class ToDoListController
             $newToDoList = $_POST['list'];
             if ($this->service->checkInsertToDoList($newToDoList) != false) {
                 echo "<script>alert('新增完成!');</script>";
+                echo "<script>window.location.href='/todoList'</script>";
+            } else {
+                echo "<script>alert('後台錯誤，無法新增!');</script>";
                 echo "<script>window.location.href='/todoList'</script>";
             }
         }
@@ -70,12 +72,21 @@ class ToDoListController
         /** @var mysqli_result $result 資料庫連線型別*/
         $result = $this->model->toDoListData();
         while ($resultRows = mysqli_fetch_assoc($result)) {
-            if (isset($_POST[$resultRows['id']])) {
-                $delId = $_POST[$resultRows['id']];
-                $this->service->checkDeleteToDoList($delId);
+            if (isset($_POST["delete" . $resultRows['id']])) {
+                $this->delId = $resultRows['id'];
+                break;
             }
+        }
+        if ($this->model->deleteToDoList($this->delId) != false) {
             echo "<script>alert('已刪除!');</script>";
             echo "<script>window.location.href='/todoList'</script>";
+        } else {
+            echo "<script>alert('後台錯誤，無法刪除!');</script>";
+            echo "<script>window.location.href='/todoList'</script>";
         }
+    }
+
+    public function updateToDoList()
+    {
     }
 }

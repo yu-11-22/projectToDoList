@@ -22,13 +22,13 @@ class TodoListService
         $this->listToDoList();
         $template->set('title', "待辦事項");
         $template->set('headerTitle', "待辦事項：");
-        $template->set('newToDoListLinkTo', "/todoList");
-        $template->set('newToDoListMethod', "post");
-        $template->set('newToDoListName', "list");
-        $template->set('deleteLinkTo', "/todoList");
-        $template->set('deleteMethod', "post");
         $template->set('toDoListLinkTo', "/todoList");
         $template->set('toDoListMethod', "post");
+        $template->set('toDoListName', "list");
+        $template->set('deleteLinkTo', "/todoList");
+        $template->set('deleteMethod', "post");
+        $template->set('newToDoListLinkTo', "/todoList");
+        $template->set('newToDoListMethod', "post");
         $template->set('logoutMethod', "post");
         $template->set('logoutLinkTo', "/logout");
         $template->set('resetHref', "/update");
@@ -45,7 +45,7 @@ class TodoListService
         /** @var mysqli_result $result 資料庫連線型別*/
         $result = $this->model->toDoListData();
         while ($resultRows = mysqli_fetch_assoc($result)) {
-            array_push($this->listArray, array($resultRows['id'], $resultRows['list'], $resultRows['id'], "updateName$resultRows[id]"));
+            array_push($this->listArray, array($resultRows['id'], $resultRows['list'], "delete".$resultRows['id'], "update".$resultRows['id']));
         }
     }
 
@@ -68,18 +68,5 @@ class TodoListService
             return false;
         }
         return false;
-    }
-
-    /**
-     * 驗證刪除待辦事項資料
-     *
-     * @return void
-     */
-    public function checkDeleteToDoList($delId)
-    {
-        if ($_SERVER['REQUEST_METHOD'] == "POST") {
-            $this->model->deleteToDoList($delId);
-        }
-        die();
     }
 }

@@ -12,8 +12,8 @@
 <body>
     <div class="header">
         <div class="inputTodo"><?= $headerTitle; ?></div>
-        <form method=<?= $newToDoListMethod; ?> action=<?= $newToDoListLinkTo; ?>>
-            <input type="text" name=<?= $newToDoListName; ?> placeholder="輸入待辦事項" required>
+        <form method=<?= $toDoListMethod; ?> action=<?= $toDoListLinkTo; ?>>
+            <input type="text" name=<?= $toDoListName; ?> placeholder="輸入待辦事項" required>
             <button type="submit" name="submit" class="btn">增加事項</button>
             <input type="hidden" name="hidden">
         </form>
@@ -34,15 +34,15 @@
                         <td><?= $item[0]; ?></td>
                         <td><?= $item[1]; ?></td>
                         <td>
-                            <form action=<?= $deleteLinkTo; ?> method=<?= $deleteMethod; ?>>
+                            <form method=<?= $deleteMethod; ?> action=<?= $deleteLinkTo; ?>>
                                 <input type="hidden" value=<?= $item[2]; ?> name=<?= $item[2]; ?>>
                                 <button type="submit" name="submit" style="background:none;border:none;cursor:pointer;color:red;">X</button>
-                        </form>
+                            </form>
                         </td>
                         <td>
-                            <form method=<?= $toDoListMethod; ?> action=<?= $toDoListLinkTo; ?>></form>
-                            <input type="text" name="<?= $item[3]; ?>" placeholder="輸入更改事項" required>
-                            <button type="submit" name="submit" class="btn">確認</button>
+                            <form method=<?= $newToDoListMethod; ?> action=<?= $newToDoListLinkTo; ?>>
+                                <input type="text" name="<?= $item[3]; ?>" placeholder="輸入更改事項" required>
+                                <button type="submit" name="submit" class="btn">確認</button>
                             </form>
                         </td>
                     </tr>
