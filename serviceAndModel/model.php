@@ -80,6 +80,22 @@ class Model
     }
 
     /**
+     * id對應resultRows刪除事項
+     *
+     * @param [type] $newList
+     * @param [type] $resultRows
+     * @return boolean
+     */
+    public function updateToDoList($newList, $resultRows): bool
+    {
+        if ($this->crud->update("vincent.tasks", "list", $newList, "id", $resultRows)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /**
      * 修改密碼寫入資料庫
      *
      * @param [type] $sessionAccount

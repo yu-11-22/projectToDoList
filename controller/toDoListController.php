@@ -9,6 +9,7 @@ class ToDoListController
     public $service;
     public $model;
     public $delId;
+    public $updateId;
 
     public function __construct()
     {
@@ -41,6 +42,7 @@ class ToDoListController
     {
         $this->newToDoList();
         $this->deleteToDoList();
+        $this->updateToDoList();
     }
 
     /**
@@ -77,16 +79,39 @@ class ToDoListController
                 break;
             }
         }
-        if ($this->model->deleteToDoList($this->delId) != false) {
-            echo "<script>alert('已刪除!');</script>";
-            echo "<script>window.location.href='/todoList'</script>";
-        } else {
-            echo "<script>alert('後台錯誤，無法刪除!');</script>";
-            echo "<script>window.location.href='/todoList'</script>";
+        if (isset($_POST["delete" . $this->delId])) {
+            if ($this->model->deleteToDoList($this->delId) != false) {
+                echo "<script>alert('已刪除!');</script>";
+                echo "<script>window.location.href='/todoList'</script>";
+            } else {
+                echo "<script>alert('後台錯誤，無法刪除!');</script>";
+                echo "<script>window.location.href='/todoList'</script>";
+            }
         }
     }
 
+    /**
+     * 修改事項
+     *
+     * @return void
+     */
     public function updateToDoList()
     {
+        /** @var mysqli_result $result 資料庫連線型別*/
+        $result = $this->model->toDoListData();
+        while ($resultRows = mysqli_fetch_assoc($result)) {
+            if (isset($_POST["update" . $resultRows['id']])) {
+                $this->updateId = $resultRows['id'];
+                break;
+            }
+        }
+        if (isset($_POST["update" . $this->updateId])) {
+            if ($this->model->updateToDoList($_POST["update" . $this->updateId], $this->updateId) != false) {
+                echo "<script>window.location.href='/todoList'</script>";
+            } else {
+                echo "<script>alert('後台錯誤，無法修改事項!');</script>";
+                echo "<script>window.location.href='/todoList'</script>";
+            }
+        }
     }
 }

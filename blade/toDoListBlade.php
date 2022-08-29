@@ -35,7 +35,7 @@
                         <td><?= $item[1]; ?></td>
                         <td>
                             <form method=<?= $deleteMethod; ?> action=<?= $deleteLinkTo; ?>>
-                                <input type="hidden" value=<?= $item[2]; ?> name=<?= $item[2]; ?>>
+                                <input type="hidden" name=<?= $item[2]; ?>>
                                 <button type="submit" name="submit" style="background:none;border:none;cursor:pointer;color:red;">X</button>
                             </form>
                         </td>
